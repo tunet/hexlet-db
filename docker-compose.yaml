@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+    pgsql:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                LINUX_USER_ID: 1000
+        command: postgres -c listen_addresses=*
+        environment:
+            - TZ=UTC
+            - POSTGRES_DB=hexlet
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=abcde
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+        ports:
+            - "5490:5432"
